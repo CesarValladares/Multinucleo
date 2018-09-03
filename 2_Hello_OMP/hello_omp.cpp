@@ -11,7 +11,7 @@ void allThreads()
 
 	// Openmp pragma indicates that the following block is going to be parallel, and that 
 	// the threadID variable is private in this block
-#pragma omp parallel private(threadID)
+	#pragma omp parallel private(threadID) //num_threads(4)
 	{
 		threadID = omp_get_thread_num();
 		cout << "Hello world from thread: " << (int)threadID << endl;
@@ -28,6 +28,7 @@ void allThreads()
 
 int main()
 {
+	// omp_set_num_threads(4);
 	allThreads();
 	return 0;
 }

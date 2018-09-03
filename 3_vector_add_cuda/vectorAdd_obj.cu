@@ -64,9 +64,11 @@ __global__ void vecAdd(vector3d<float> *a, vector3d<float> *b, vector3d<float> *
 
     if (id < n)
     {
-        c[id].x = a[id].x + b[id].x;
-        c[id].y = a[id].y + b[id].y;
-        c[id].z = a[id].z + b[id].z;
+        // c[id].x = a[id].x + b[id].x;
+        // c[id].y = a[id].y + b[id].y;
+        // c[id].z = a[id].z + b[id].z;
+
+        c[id] = a[id] + b[id];
 
         c[id].test();
     }
