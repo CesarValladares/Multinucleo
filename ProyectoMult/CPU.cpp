@@ -24,16 +24,13 @@ string readFile(string name){
 
     while (getline(f, aux)){
 
-        result+=&aux;
+        result+=aux;
 
     }
 
     f.close();
 
-    cout << result << endl;
-
     return result;
-
 }
 
 void cipher (unsigned char* &input, unsigned char* &output, int cols, int rows, string word){
@@ -95,15 +92,13 @@ void decipher (unsigned char* input, int width, int height, unsigned char * word
                 int a = (letra >> x) & 1U;
   
             } 
-
-
         }  
 
         word[i] = letra;
     }
 }
 
-void readImageFile(string file){
+void readImageFile(string file, string text){
 
     Mat image;
     Mat output; 
@@ -127,11 +122,13 @@ void readImageFile(string file){
         int x = image.cols;
         int y = image.rows;
 
+        int totalWords = (y*x)/8;
+
         unsigned char * word = new unsigned char[x*y];
 
-        cout << "Input image step: " << image.step << " cols: " << x << " rows: " << y << endl;
+        cout << "Input image step: " << image.step << " cols: " << x << " rows: " << y << " Total characters: " << totalWords << endl;
         
-        string a = "hello";
+        string a = readFile(text);
 
         cipher(image1D, output1D, x, y, a);
 
@@ -156,14 +153,14 @@ void readImageFile(string file){
 
 int main (int argc, char** argv){
 
-    if (argc < 2){
+    if (argc < 3){
          
         cout << "No hay argumentos suficientes" << endl;
 
     }else{
 
         auto startTime = chrono::high_resolution_clock::now();
-        readImageFile(argv[1]);
+        readImageFile(argv[1], argv[2]);
         auto endTime = chrono::high_resolution_clock::now();
         chrono::duration<float, std::milli> duration_ms = endTime - startTime;
 
