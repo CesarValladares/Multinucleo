@@ -7,9 +7,34 @@
 #include <math.h>
 #include <strings.h>
 #include <bitset>
+#include <fstream>
 
 using namespace std;
 using namespace cv;
+
+string readFile(string name){
+
+    string result; 
+    string aux; 
+
+    ifstream f (name);
+
+    if (!f.is_open())
+    perror("error while opening file");
+
+    while (getline(f, aux)){
+
+        result+=&aux;
+
+    }
+
+    f.close();
+
+    cout << result << endl;
+
+    return result;
+
+}
 
 void cipher (unsigned char* &input, unsigned char* &output, int cols, int rows, string word){
 
@@ -114,7 +139,7 @@ void readImageFile(string file){
 
         cout << "mensaje: " << word << endl;
 
-        image = Mat(image.rows,image.cols,CV_8UC3, image1D);
+        /*image = Mat(image.rows,image.cols,CV_8UC3, image1D);
         Mat output = Mat(image.rows, image.cols,CV_8UC3, output1D);
 
         /*namedWindow("Original", cv::WINDOW_NORMAL);
